@@ -109,7 +109,7 @@ endif()
 
 # ==================== 运行测试（可选）================
 add_custom_target(run_test_cases_case1
-        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/parser ${CMAKE_CURRENT_SOURCE_DIR}/test_cases/case1.sy
+        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/parser ${CMAKE_CURRENT_SOURCE_DIR}/test_cases/case_1.sy
         DEPENDS parser
         COMMENT "Running parser on test_cases/case1.sy"
 )
