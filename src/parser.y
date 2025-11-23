@@ -110,6 +110,30 @@ BlockItem: { $$ = NULL; }
 //| 'break' ';' | 'continue' ';'
 //| 'return' [Exp] ';'
 
+Stmt:   LVal ASSIGN Exp SEMICOLON
+            { $$ = new_node(Stmt, NULL, $3, $1, ASSIGN, 0, NULL, NonType); }
+      | SEMICOLON
+            { $$ = new_node(Stmt, NULL, NULL, NULL, EmptyStmt, 0, NULL, NonType); }
+      | Exp SEMICOLON
+            { $$ = new_node(Stmt, NULL, NULL, $1, ExpStmt, 0, NULL, NonType); }
+      | Block
+            { $$ = new_node(Stmt, NULL, NULL, $1, BlockStmt, 0, NULL, NonType); }
+      | IF LP Cond RP Stmt %prec THEN
+            { $$ = new_node(Stmt, NULL, $5, $3, IfStmt, 0, NULL, NonType); }
+      | IF LP Cond RP Stmt ELSE Stmt
+            { $$ = new_node(Stmt, $7, $5, $3, IfElseStmt, 0, NULL, NonType); }
+      | WHILE LP Cond RP Stmt
+            { $$ = new_node(Stmt, NULL, $5, $3, WhileStmt, 0, NULL, NonType); }
+      | BREAK SEMICOLON
+            { $$ = new_node(Stmt, NULL, NULL, NULL, BreakStmt, 0, NULL, NonType); }
+      | CONTINUE SEMICOLON
+            { $$ = new_node(Stmt, NULL, NULL, NULL, ContinueStmt, 0, NULL, NonType); }
+      | RETURN SEMICOLON
+            { $$ = new_node(Stmt, NULL, NULL, NULL, BlankReturnStmt, 0, NULL, NonType); }
+      | RETURN Exp SEMICOLON
+            { $$ = new_node(Stmt, NULL, $2, NULL, ReturnStmt, 0, NULL, NonType); }
+      ;
+
 
 
 Exp: AddExp { $$ = new_node(Exp, NULL, NULL, $1, 0, 0, NULL, NonType); };

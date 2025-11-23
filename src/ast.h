@@ -14,6 +14,8 @@ extern int LEV;      //层号
 #define BLOCK -2147483647
 
 typedef enum node_type {
+    EmptyStmt,
+    BlockStmt,
     CompUnit,
     ConstDecl,
     VarDecl,
