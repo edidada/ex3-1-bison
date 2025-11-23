@@ -153,6 +153,6 @@ make clean
 ./cgen.sh 
 make 
 测试提示：
-./parser ../testcases/case1.sy
+./parser ../testcases/case_1.sy
 ./parser ../testcases/087_gcd.sy
 ```

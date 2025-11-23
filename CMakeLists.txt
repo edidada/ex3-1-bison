@@ -113,3 +113,9 @@ add_custom_target(run_test_cases_case1
         DEPENDS parser
         COMMENT "Running parser on test_cases/case1.sy"
 )
+
+add_custom_target(run_test_cases_087_gcd
+COMMAND ${CMAKE_CURRENT_BINARY_DIR}/parser ${CMAKE_CURRENT_SOURCE_DIR}/testcases/087_gcd.sy
+DEPENDS parser
+COMMENT "Running parser on test_cases/case1.sy"
+)
