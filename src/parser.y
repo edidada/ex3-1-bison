@@ -183,9 +183,11 @@ int main(int argc, char *argv[]) {
     strcpy(filename, argv[1] + index);
     freopen(argv[1], "r", stdin);
     yyparse();
-    if (syntax_error == 0) 
+    if (syntax_error == 0) {
         display(root);
-    return 0;
+        return 0;
+    }
+    return 1;
 }
 
 /*

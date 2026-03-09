@@ -115,7 +115,56 @@ add_custom_target(run_test_cases_case1
 )
 
 add_custom_target(run_test_cases_087_gcd
-COMMAND ${CMAKE_CURRENT_BINARY_DIR}/parser ${CMAKE_CURRENT_SOURCE_DIR}/testcases/087_gcd.sy
-DEPENDS parser
-COMMENT "Running parser on test_cases/case1.sy"
+        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/parser ${CMAKE_CURRENT_SOURCE_DIR}/test_cases/087_gcd.sy
+        DEPENDS parser
+        COMMENT "Running parser on test_cases/087_gcd.sy"
 )
+
+# ==================== CTest 测试 ====================
+enable_testing()
+
+# 正确的测试用例（应该成功解析）
+add_test(NAME test_012_func_defn
+        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/parser ${CMAKE_CURRENT_SOURCE_DIR}/test_cases/012_func_defn.sy
+)
+add_test(NAME test_038_continue
+        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/parser ${CMAKE_CURRENT_SOURCE_DIR}/test_cases/038_continue.sy
+)
+add_test(NAME test_067_sort_test7
+        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/parser ${CMAKE_CURRENT_SOURCE_DIR}/test_cases/067_sort_test7.sy
+)
+add_test(NAME test_087_gcd
+        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/parser ${CMAKE_CURRENT_SOURCE_DIR}/test_cases/087_gcd.sy
+)
+add_test(NAME test_test1
+        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/parser ${CMAKE_CURRENT_SOURCE_DIR}/test_cases/test1.sy
+)
+add_test(NAME test_test2
+        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/parser ${CMAKE_CURRENT_SOURCE_DIR}/test_cases/test2.sy
+)
+
+# 错误的测试用例（应该报告语法错误）
+add_test(NAME test_case_1
+        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/parser ${CMAKE_CURRENT_SOURCE_DIR}/test_cases/case_1.sy
+)
+set_tests_properties(test_case_1 PROPERTIES WILL_FAIL TRUE)
+
+add_test(NAME test_case_2
+        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/parser ${CMAKE_CURRENT_SOURCE_DIR}/test_cases/case_2.sy
+)
+set_tests_properties(test_case_2 PROPERTIES WILL_FAIL TRUE)
+
+add_test(NAME test_case_3
+        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/parser ${CMAKE_CURRENT_SOURCE_DIR}/test_cases/case_3.sy
+)
+set_tests_properties(test_case_3 PROPERTIES WILL_FAIL TRUE)
+
+add_test(NAME test_case_4
+        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/parser ${CMAKE_CURRENT_SOURCE_DIR}/test_cases/case_4.sy
+)
+set_tests_properties(test_case_4 PROPERTIES WILL_FAIL TRUE)
+
+add_test(NAME test_case_5
+        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/parser ${CMAKE_CURRENT_SOURCE_DIR}/test_cases/case_5.sy
+)
+set_tests_properties(test_case_5 PROPERTIES WILL_FAIL TRUE)
