@@ -1,4 +1,4 @@
-%define parse.error verbose
+%error-verbose
 %locations
 %{
 #include <stdio.h>
@@ -111,7 +111,7 @@ BlockItem: { $$ = NULL; }
 //| 'return' [Exp] ';'
 
 Stmt:   LVal ASSIGN Exp SEMICOLON
-            { $$ = new_node(Stmt, NULL, $3, $1, ASSIGN, 0, NULL, NonType); }
+            { $$ = new_node(Stmt, NULL, $3, $1, AssignStmt, 0, NULL, NonType); }
       | SEMICOLON
             { $$ = new_node(Stmt, NULL, NULL, NULL, EmptyStmt, 0, NULL, NonType); }
       | Exp SEMICOLON
@@ -136,7 +136,7 @@ Stmt:   LVal ASSIGN Exp SEMICOLON
 
 
 
-Exp: AddExp { $$ = new_node(Exp, NULL, NULL, $1, 0, 0, NULL, NonType); };
+Exp: LOrExp { $$ = new_node(Exp, NULL, NULL, $1, 0, 0, NULL, NonType); };
 AddExp: MulExp { $$ = new_node(AddExp, NULL, NULL, $1, MUL, 0, NULL, NonType); }
       | MulExp PLUS AddExp { $$ = new_node(AddExp, $3, NULL, $1, PLUS, 0, NULL, NonType); }
       | MulExp MINUS AddExp { $$ = new_node(AddExp, $3, NULL, $1, MINUS, 0, NULL, NonType); };

@@ -430,7 +430,7 @@ void print_stmt(ASTNode* T)
 		printf("Assign Statement\n");
 		gapManage(T, 0);
 		break;
-	case Block:
+	case BlockStmt:
 		handle_next_display = 0;
 		print_block(T->right);
 		break;
